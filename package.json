@@ -1,0 +1,48 @@
+{
+  "name": "session-data",
+  "version": "0.1.1",
+  "description": "Store Data into session middleware for Connect.",
+  "keywords": [
+    "connect",
+    "express",
+    "session",
+    "data"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Asw20/session-data.git"
+  },
+  "bugs": {
+    "url": "http://github.com/Asw20/session-data/issues"
+  },
+  "author": {
+    "name": "Nicolas Rollin",
+    "email": "nirollin@gmail.com",
+    "url": "http://www.objclt.com/"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://www.opensource.org/licenses/MIT"
+    }
+  ],
+  "main": "./lib",
+  "dependencies": {},
+  "devDependencies": {
+    "vows": "0.6.x"
+  },
+  "scripts": {
+    "test": "NODE_PATH=lib node_modules/.bin/vows test/*-test.js"
+  },
+  "engines": {
+    "node": ">= 0.4.0"
+  },
+  "maintainers": [
+    {
+      "name": "Asw20",
+      "email": "nirollin@gmail.com"
+    }
+  ],
+  "directories": {},
+  "homepage": "https://github.com/Asw20/session-data"
+}
