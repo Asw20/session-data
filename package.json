@@ -15,11 +15,7 @@
   "bugs": {
     "url": "http://github.com/Asw20/session-data/issues"
   },
-  "author": {
-    "name": "Nicolas Rollin",
-    "email": "nirollin@gmail.com",
-    "url": "http://www.objclt.com/"
-  },
+  "author": "Nicolas Rollin <nirollin@gmail.com> (http://www.objclt.com/)",
   "licenses": [
     {
       "type": "MIT",
@@ -38,11 +34,9 @@
     "node": ">= 0.4.0"
   },
   "maintainers": [
-    {
-      "name": "Asw20",
-      "email": "nirollin@gmail.com"
-    }
+    "Asw20 <nirollin@gmail.com>"
   ],
   "directories": {},
-  "homepage": "https://github.com/Asw20/session-data"
+  "homepage": "https://github.com/Asw20/session-data",
+  "license": "MIT"
 }
