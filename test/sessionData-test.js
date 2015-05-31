@@ -36,54 +36,54 @@ vows.describe('sessionData').addBatch({
         });
       },
       
-      'should not error' : function(err, req, res) {
+      '001 should not error' : function(err, req, res) {
         assert.isNull(err);
       },
-      'should add a sessionData function' : function(err, req, res) {
+      '002 should add a sessionData function' : function(err, req, res) {
         assert.isFunction(req.sessionData);
       },
-      'should set sessionData value' : function(err, req, res) {
-        var count = req.sessionData('var01', 'value01');
+      '003 should set sessionData value' : function(err, req, res) {
+        var count = req.sessionData('var010', 'value010');
         assert.equal(count, 1);
         assert.lengthOf(Object.keys(req.session.sessionData), 1);
-        assert.lengthOf(req.session.sessionData['var01'], 1);
+        assert.lengthOf(req.session.sessionData['var010'], 1);
       },
-      'should get and clear previously set sessionData value' : function(err, req, res) {
-        var msgs = req.sessionData('var01');
+      '004 should get and clear previously set sessionData value' : function(err, req, res) {
+        var msgs = req.sessionData('var010');
         assert.lengthOf(msgs, 1);
-        assert.equal(msgs[0], 'value01');
+        assert.equal(msgs[0], 'value010');
         assert.lengthOf(Object.keys(req.session.sessionData), 0);
       },
-      'should set multiple sessionData messages' : function(err, req, res) {
-        req.sessionData('info', 'Welcome');
-        var count = req.sessionData('info', 'Check out this great new feature');
+      '005 should set multiple sessionData messages' : function(err, req, res) {
+        req.sessionData('var020', 'valu020');
+        var count = req.sessionData('var020', 'value021');
         assert.equal(count, 2);
         assert.lengthOf(Object.keys(req.session.sessionData), 1);
-        assert.lengthOf(req.session.sessionData['info'], 2);
+        assert.lengthOf(req.session.sessionData['var020'], 2);
       },
-      'should set sessionData messages in one call' : function(err, req, res) {
-        var count = req.sessionData('warning', ['username required', 'password required']);
+      '006 should set sessionData messages in one call' : function(err, req, res) {
+        var count = req.sessionData('var030', ['valu030', 'valu031']);
         assert.equal(count, 2);
-        var msgs = req.sessionData('warning');
+        var msgs = req.sessionData('var030');
         assert.lengthOf(msgs, 2);
-        assert.equal(msgs[0], 'username required');
-        assert.equal(msgs[1], 'password required');
+        assert.equal(msgs[0], 'valu030');
+        assert.equal(msgs[1], 'valu031');
       },
-      'should get and clear multiple previously set sessionData messages' : function(err, req, res) {
+      '007 should get and clear multiple previously set sessionData messages' : function(err, req, res) {
         var msgs = req.sessionData('info');
         assert.lengthOf(msgs, 2);
         assert.equal(msgs[0], 'Welcome');
         assert.equal(msgs[1], 'Check out this great new feature');
         assert.lengthOf(Object.keys(req.session.sessionData), 0);
       },
-      'should set sessionData messages of multiple types' : function(err, req, res) {
+      '008 should set sessionData messages of multiple types' : function(err, req, res) {
         req.sessionData('info', 'Welcome back');
         req.sessionData('notice', 'Last login was yesterday');
         assert.lengthOf(Object.keys(req.session.sessionData), 2);
         assert.lengthOf(req.session.sessionData['info'], 1);
         assert.lengthOf(req.session.sessionData['notice'], 1);
       },
-      'should independently get and clear messages of multiple types' : function(err, req, res) {
+      '009 should independently get and clear messages of multiple types' : function(err, req, res) {
         var msgs = req.sessionData('info');
         assert.lengthOf(msgs, 1);
         assert.equal(msgs[0], 'Welcome back');
@@ -92,7 +92,7 @@ vows.describe('sessionData').addBatch({
         assert.lengthOf(msgs, 1);
         assert.equal(msgs[0], 'Last login was yesterday');
       },
-      'should return all messages' : function(err, req, res) {
+      '010 should return all messages' : function(err, req, res) {
         req.sessionData('error', 'Database is down');
         req.sessionData('error', 'Message queue is down');
         req.sessionData('notice', 'Things are looking bleak');
@@ -102,7 +102,7 @@ vows.describe('sessionData').addBatch({
         assert.lengthOf(msgs['notice'], 1);
         assert.lengthOf(Object.keys(req.session.sessionData), 0);
       },
-      'should format messages' : function(err, req, res) {
+      '011 should format messages' : function(err, req, res) {
         if (util.format) {
           req.sessionData('info', 'Hello %s', 'Jared');
           var msg = req.sessionData('info')[0];
@@ -113,7 +113,7 @@ vows.describe('sessionData').addBatch({
           assert.equal(msg, 'Hello Jared Hanson')
         }
       },
-      'should return empty array for sessionData type with no messages' : function(err, req, res) {
+      '012 should return empty array for sessionData type with no messages' : function(err, req, res) {
         var msgs = req.sessionData('what');
         assert.lengthOf(msgs, 0);
       },
@@ -136,10 +136,10 @@ vows.describe('sessionData').addBatch({
         });
       },
       
-      'should not error' : function(err, req, res) {
+      '1001 should not error' : function(err, req, res) {
         assert.isNull(err);
       },
-      'should not overwrite sessionData function' : function(err, req, res) {
+      '1002 should not overwrite sessionData function' : function(err, req, res) {
         req.sessionData('question', 'Do you?')
         assert.equal(req.session.sessionData, 'I Exist');
       },
@@ -159,13 +159,13 @@ vows.describe('sessionData').addBatch({
         });
       },
       
-      'should not error' : function(err, req, res) {
+      '2001 should not error' : function(err, req, res) {
         assert.isNull(err);
       },
-      'should add a sessionData function' : function(err, req, res) {
+      '2002 should add a sessionData function' : function(err, req, res) {
         assert.isFunction(req.sessionData);
       },
-      'should throw when attempting to set a sessionData message' : function(err, req, res) {
+      '2003 should throw when attempting to set a sessionData message' : function(err, req, res) {
         assert.throws(function() {
           req.sessionData('error', 'Something went wrong');
         });
@@ -195,10 +195,10 @@ vows.describe('sessionData').addBatch({
         });
       },
       
-      'should not error' : function(err, req, res) {
+      '3001 should not error' : function(err, req, res) {
         assert.isNull(err);
       },
-      'should overwrite sessionData function' : function(err, req, res) {
+      '3002 should overwrite sessionData function' : function(err, req, res) {
         req.sessionData('info', 'It works!');
         assert.lengthOf(Object.keys(req.session.sessionData), 1);
         assert.lengthOf(req.session.sessionData['info'], 1);

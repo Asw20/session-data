@@ -1,6 +1,6 @@
 var vows = require('vows');
 var assert = require('assert');
-var flash = require('index');
+var sessionData = require('index');
 
 
 vows.describe('session-data').addBatch({
