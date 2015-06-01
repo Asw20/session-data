@@ -43,64 +43,68 @@ vows.describe('sessionData').addBatch({
         assert.isFunction(req.sessionData);
       },
       '003 should set sessionData value' : function(err, req, res) {
-        var count = req.sessionData('var010', 'value010');
+        var count = req.sessionData('var030', 'value030');
         assert.equal(count, 1);
         assert.lengthOf(Object.keys(req.session.sessionData), 1);
-        assert.lengthOf(req.session.sessionData['var010'], 1);
+        assert.lengthOf(req.session.sessionData['var030'], 1);
       },
-      '004 should get and clear previously set sessionData value' : function(err, req, res) {
-        var msgs = req.sessionData('var010');
+      '003-2 should get and clear previously set sessionData value' : function(err, req, res) {
+        var msgs = req.sessionData('var030');
         assert.lengthOf(msgs, 1);
-        assert.equal(msgs[0], 'value010');
+        assert.equal(msgs[0], 'value030');
         assert.lengthOf(Object.keys(req.session.sessionData), 0);
       },
       '005 should set multiple sessionData messages' : function(err, req, res) {
-        req.sessionData('var020', 'valu020');
-        var count = req.sessionData('var020', 'value021');
+        req.sessionData('var050', 'value050');
+        var count = req.sessionData('var050', 'value051');
         assert.equal(count, 2);
         assert.lengthOf(Object.keys(req.session.sessionData), 1);
-        assert.lengthOf(req.session.sessionData['var020'], 2);
+        assert.lengthOf(req.session.sessionData['var050'], 2);
       },
-      '006 should set sessionData messages in one call' : function(err, req, res) {
-        var count = req.sessionData('var030', ['valu030', 'valu031']);
-        assert.equal(count, 2);
-        var msgs = req.sessionData('var030');
-        assert.lengthOf(msgs, 2);
-        assert.equal(msgs[0], 'valu030');
-        assert.equal(msgs[1], 'valu031');
-      },
-      '007 should get and clear multiple previously set sessionData messages' : function(err, req, res) {
-        var msgs = req.sessionData('info');
-        assert.lengthOf(msgs, 2);
-        assert.equal(msgs[0], 'Welcome');
-        assert.equal(msgs[1], 'Check out this great new feature');
+      '005-2 should get and clear multiple previously set sessionData messages' : function(err, req, res) {
+    	req.sessionData('var050', 'value052'); 
+    	req.sessionData('var050', 'value053'); 
+        var msgs = req.sessionData('var050');
+        assert.lengthOf(msgs, 4);
+        assert.equal(msgs[0], 'value050');
+        assert.equal(msgs[1], 'value051');
+        assert.equal(msgs[2], 'value052');
+        assert.equal(msgs[3], 'value053');
         assert.lengthOf(Object.keys(req.session.sessionData), 0);
+//     },
+//      '006 should set sessionData messages in one call' : function(err, req, res) {
+//        var count = req.sessionData('var060', ['value060', 'value061']);
+//        assert.equal(count, 2);
+//        var msgs = req.sessionData('var060');
+//        assert.lengthOf(msgs, 2);
+//        assert.equal(msgs[0], 'value060');
+//        assert.equal(msgs[1], 'value061');
       },
       '008 should set sessionData messages of multiple types' : function(err, req, res) {
-        req.sessionData('info', 'Welcome back');
-        req.sessionData('notice', 'Last login was yesterday');
+        req.sessionData('var080', 'value080');
+        req.sessionData('var081', 'value080');
         assert.lengthOf(Object.keys(req.session.sessionData), 2);
-        assert.lengthOf(req.session.sessionData['info'], 1);
-        assert.lengthOf(req.session.sessionData['notice'], 1);
+        assert.lengthOf(req.session.sessionData['var080'], 1);
+        assert.lengthOf(req.session.sessionData['var081'], 1);
       },
-      '009 should independently get and clear messages of multiple types' : function(err, req, res) {
-        var msgs = req.sessionData('info');
+      '008-1 should independently get and clear messages of multiple types' : function(err, req, res) {
+        var msgs = req.sessionData('var080');
         assert.lengthOf(msgs, 1);
-        assert.equal(msgs[0], 'Welcome back');
+        assert.equal(msgs[0], 'value080');
         assert.lengthOf(Object.keys(req.session.sessionData), 1);
-        msgs = req.sessionData('notice');
+        msgs = req.sessionData('var081');
         assert.lengthOf(msgs, 1);
-        assert.equal(msgs[0], 'Last login was yesterday');
+        assert.equal(msgs[0], 'value080');
       },
       '010 should return all messages' : function(err, req, res) {
-        req.sessionData('error', 'Database is down');
-        req.sessionData('error', 'Message queue is down');
-        req.sessionData('notice', 'Things are looking bleak');
+        req.sessionData('var100', 'value100');
+        req.sessionData('var100', 'value101');
+        req.sessionData('var101', 'value102');
         var msgs = req.sessionData();
         assert.lengthOf(Object.keys(msgs), 2);
-        assert.lengthOf(msgs['error'], 2);
-        assert.lengthOf(msgs['notice'], 1);
-        assert.lengthOf(Object.keys(req.session.sessionData), 0);
+        assert.lengthOf(msgs['var100'], 2);
+        assert.lengthOf(msgs['var101'], 1);
+        assert.lengthOf(Object.keys(req.session.sessionData), 2);
       },
       '011 should format messages' : function(err, req, res) {
         if (util.format) {
